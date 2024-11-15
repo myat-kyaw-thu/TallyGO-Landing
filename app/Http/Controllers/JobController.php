@@ -2,62 +2,89 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\JobPosted;
 use App\Models\Job;
-use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class JobController extends Controller
 {
-    public  function index()
+    public function index()
     {
-        $jobs = Job::with("employer")->latest()->simplePaginate(3);
+        $jobs = Job::with('employer')->latest()->simplePaginate(3);
 
-        return view("job.index", compact("jobs"));
+        return view('jobs.index', [
+            'jobs' => $jobs
+        ]);
     }
-    public  function  create()
+
+    public function create()
     {
-        return view("job.create");
+        return view('jobs.create');
     }
-    public  function store(Request $request)
+
+    public function show(Job $job)
+    {
+        return view('jobs.show', ['job' => $job]);
+    }
+
+    public function store()
     {
         request()->validate([
-            "title" => ["required", 'min:3'],
-            'salary' => ['required'],
+            'title' => ['required', 'min:3'],
+            'salary' => ['required']
         ]);
-        Job::create([
-            "title" => $request["title"],
-            "salary" => $request["salary"],
-            "employer_id" => 1,
+    
+        // Create the job
+        $job = Job::create([
+            'title' => request('title'),
+            'salary' => request('salary'),
+            'employer_id' => 1
         ]);
-        return redirect("/jobs");
+    
+        $job->load('employer.user');
+    
+        $email = optional($job->employer->user)->email;
+    
+        if ($email) {
+            Mail::to($email)->send(new JobPosted($job));
+        } else {
+            Log::warning('Employer or user is missing for this job.', ['job_id' => $job->id]);
+        }
+    
+        return redirect('/jobs');
+    }
+    
+
+    public function edit(Job $job)
+    {
+        return view('jobs.edit', ['job' => $job]);
     }
 
-    public  function show(Job  $job) // route model binding
+    public function update(Job $job)
     {
-        return view("job.show", compact("job"));
-    }
+        Gate::authorize('edit-job', $job);
 
-    public  function edit(Job $job)
-    {
-    return view("job.edit" , compact("job"));
-    }
-    public  function update(Job $job)
-    {
-        Gate::authorize('edit-job' , $job);
         request()->validate([
-            "title" => ["required", 'min:3'],
-            "salary' => ['required'],"
+            'title' => ['required', 'min:3'],
+            'salary' => ['required']
         ]);
+
         $job->update([
-            "title" => request("title"),
-            "salary" =>request("salary"),
+            'title' => request('title'),
+            'salary' => request('salary'),
         ]);
-        return redirect("/jobs/$job->id");
+
+        return redirect("/jobs/" . $job->id);
     }
 
     public function destroy(Job $job)
     {
-        Gate::authorize('edit-job', $job);
+        Gate::authorize('edit', $job);
+
         $job->delete();
 
         return redirect('/jobs');
