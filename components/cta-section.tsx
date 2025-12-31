@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+import { Apple, Smartphone } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { cn } from "@/lib/utils"
 
@@ -22,12 +24,22 @@ export function CtaSection() {
           Free to download. No hidden subscriptions. Just a better way to track.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button className="px-8 py-4 bg-[#222222] text-[#FFFDF8] rounded-xl font-medium hover:bg-[#3B3B3B] transition-all duration-300 w-full sm:w-auto hover:scale-[1.02] active:scale-[0.98]">
-            Download for iOS
+          <button
+            disabled
+            className="px-8 py-4 bg-[#222222] text-[#FFFDF8] rounded-xl font-medium opacity-60 cursor-not-allowed transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2"
+          >
+            <Apple size={20} />
+            <span>Coming Soon for iOS</span>
           </button>
-          <button className="px-8 py-4 bg-[#FFFDF8] border border-[#F3EFE7] text-[#1C1C1C] rounded-xl font-medium hover:bg-[#F9F6F0] transition-all duration-300 w-full sm:w-auto hover:scale-[1.02] active:scale-[0.98]">
-            Download for Android
-          </button>
+          <Link
+            href="YOUR_GOOGLE_DRIVE_LINK_HERE"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 bg-[#FFFDF8] border border-[#F3EFE7] text-[#1C1C1C] rounded-xl font-medium hover:bg-[#F9F6F0] transition-all duration-300 w-full sm:w-auto hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+          >
+            <Smartphone size={20} />
+            <span>Download for Android</span>
+          </Link>
         </div>
       </div>
     </section>
