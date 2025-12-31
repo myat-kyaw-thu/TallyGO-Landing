@@ -116,7 +116,7 @@ export function UpcomingFeaturesSection() {
         >
           <p className="text-sm text-[#5C5C5C] mb-4">Have a feature request?</p>
           <a
-            href="mailto:your-email@example.com"
+            href="mailto:myatkyawthu4002@gmail.com"
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#222222] text-[#FFFDF8] rounded-xl font-medium hover:bg-[#3A3A3A] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
           >
             Share Your Ideas
