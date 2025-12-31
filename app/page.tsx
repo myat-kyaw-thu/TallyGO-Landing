@@ -10,9 +10,7 @@ import { UserModesSection } from "@/components/user-modes-section"
 import { OfflineFirstSection } from "@/components/offline-first-section"
 import { DesignSection } from "@/components/design-section"
 import { SecuritySection } from "@/components/security-section"
-import { TechStackSection } from "@/components/tech-stack-section"
-import { DeveloperStorySection } from "@/components/developer-story-section"
-import { TargetAudienceSection } from "@/components/target-audience-section"
+import { UpcomingFeaturesSection } from "@/components/upcoming-features-section"
 import { CtaSection } from "@/components/cta-section"
 import { FaqSection } from "@/components/faq-section"
 import { Footer } from "@/components/footer"
@@ -32,9 +30,7 @@ export default function Home() {
       <OfflineFirstSection />
       <DesignSection />
       <SecuritySection />
-      <TechStackSection />
-      <DeveloperStorySection />
-      <TargetAudienceSection />
+      <UpcomingFeaturesSection />
       <CtaSection />
       <FaqSection />
       <Footer />
