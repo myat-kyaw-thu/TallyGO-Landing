@@ -33,7 +33,7 @@ export function Footer() {
           </Link>
         </div>
 
-        <div className="text-sm text-[#5C5C5C] opacity-60">© 2023 TallyGO</div>
+        <div className="text-sm text-[#5C5C5C] opacity-60">© 2026 TallyGO</div>
       </div>
     </footer>
   )

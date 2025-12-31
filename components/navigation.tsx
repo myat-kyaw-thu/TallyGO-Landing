@@ -59,7 +59,7 @@ export function Navigation() {
       >
         <nav className="w-full py-4 px-6 md:px-12 flex justify-between items-center max-w-7xl mx-auto">
           <Link href="#" className="flex items-center gap-2 text-xl font-medium tracking-tight text-[#1C1C1C]">
-            <img src="/app-img/logo.png" alt="TallyGO Logo" className="h-8 w-8" />
+            <img src="/app-img/logo.png" alt="TallyGO Logo" className="h-16 w-16" />
             <span>TallyGO</span>
           </Link>
 
@@ -87,7 +87,7 @@ export function Navigation() {
       <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#FFFDF8]/90 backdrop-blur-md border-b border-[#F3EFE7]">
         <div className="flex justify-center items-center py-3 px-4">
           <Link href="#" className="flex items-center gap-2 text-lg font-medium tracking-tight text-[#1C1C1C]">
-            <img src="/app-img/logo.png" alt="TallyGO Logo" className="h-7 w-7" />
+            <img src="/app-img/logo.png" alt="TallyGO Logo" className="h-16 w-16" />
             <span>TallyGO</span>
           </Link>
         </div>
