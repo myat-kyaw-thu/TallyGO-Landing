@@ -5,7 +5,7 @@ import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { cn } from "@/lib/utils"
 
 const features = [
-  { title: "Quick Entry:", description: "Description + Amount. That's it." },
+  { title: "Simple Entry:", description: "Amount, description, and date. Quick and straightforward." },
   { title: "Master Totals:", description: "Running daily totals always visible." },
   { title: "Zero Stress:", description: "Edit or delete entries anytime." },
 ]
@@ -41,7 +41,7 @@ export function ExpenseTrackingSection() {
             Frictionless Expense Tracking
           </h2>
           <p className="text-[#5C5C5C] text-base md:text-lg font-light mb-8">
-            Capture spending in seconds. No categories to manage, no complex budgets to set up unless you want to.
+            Capture spending quickly and easily. No categories to manage, no complex budgets to set up unless you want to.
           </p>
           <ul className="space-y-4 text-[#3A3A3A]">
             {features.map((feature, index) => (
