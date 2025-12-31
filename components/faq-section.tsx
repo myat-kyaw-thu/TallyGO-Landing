@@ -21,9 +21,9 @@ const faqs = [
       "Absolutely. If you create an account, your data is encrypted and stored securely via Supabase. I do not sell your data to third parties.",
   },
   {
-    question: "Can I switch modes later?",
+    question: "What happens to my data in Guest Mode?",
     answer:
-      "Yes. You can start as a guest and sign up later. Your local data will be automatically uploaded to your account.",
+      "In Guest Mode, your data is stored locally on your device and automatically cleaned up after 30 days. If you want permanent storage and multi-device access, create an account with Sync Mode.",
   },
 ]
 
