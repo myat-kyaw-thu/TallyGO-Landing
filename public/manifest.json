@@ -1,0 +1,26 @@
+{
+  "name": "TallyGO - Simple finances. Clear goals.",
+  "short_name": "TallyGO",
+  "description": "TallyGO is a beautifully simple mobile app that helps you track daily expenses and plan personal goals without clutter, complexity, or unnecessary features.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFDF8",
+  "theme_color": "#FFFDF8",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/app-img/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/app-img/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "productivity", "lifestyle"],
+  "lang": "en-US"
+}
