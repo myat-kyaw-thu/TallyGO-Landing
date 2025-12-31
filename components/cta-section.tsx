@@ -28,7 +28,6 @@ export function CtaSection() {
             disabled
             className="px-8 py-4 bg-[#222222] text-[#FFFDF8] rounded-xl font-medium opacity-60 cursor-not-allowed transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2"
           >
-            <Apple size={20} />
             <span>Coming Soon for iOS</span>
           </button>
           <Link
