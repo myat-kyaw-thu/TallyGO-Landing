@@ -8,8 +8,8 @@ import { ConsistencySection } from "@/components/consistency-section"
 import { InsightsSection } from "@/components/insights-section"
 import { UserModesSection } from "@/components/user-modes-section"
 import { OfflineFirstSection } from "@/components/offline-first-section"
-import { DesignSection } from "@/components/design-section"
-import { SecuritySection } from "@/components/security-section"
+import { WhatsNewSection } from "@/components/whats-new-section"
+import { DeveloperStorySection } from "@/components/developer-story-section"
 import { UpcomingFeaturesSection } from "@/components/upcoming-features-section"
 import { CtaSection } from "@/components/cta-section"
 import { FaqSection } from "@/components/faq-section"
@@ -20,6 +20,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#FFFDF8] text-[#3A3A3A] selection:bg-[#F3EFE7] selection:text-[#1C1C1C] pb-20 md:pb-0">
       <Navigation />
       <HeroSection />
+      <WhatsNewSection />
       <PhilosophySection />
       <PrinciplesSection />
       <ExpenseTrackingSection />
@@ -28,8 +29,7 @@ export default function Home() {
       <InsightsSection />
       <UserModesSection />
       <OfflineFirstSection />
-      <DesignSection />
-      <SecuritySection />
+      <DeveloperStorySection />
       <UpcomingFeaturesSection />
       <CtaSection />
       <FaqSection />

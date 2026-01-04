@@ -15,14 +15,20 @@ export function DeveloperStorySection() {
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
         )}
       >
-        <h3 className="text-xl font-medium text-[#1C1C1C] mb-4">A Note from the Developer</h3>
+        <h3 className="text-xl font-medium text-[#1C1C1C] mb-4">Why I Built TallyGO</h3>
         <p className="text-[#5C5C5C] leading-relaxed mb-6 font-light">
-          Hi, I'm Myat Kyaw Thu. I built TallyGO because I was tired of finance apps that felt like casinos. I wanted a
-          tool that respected my time and helped me focus on what actually matters—my goals and my daily habits.
+          Hi, I'm Myat Kyaw Thu, a developer from Myanmar. I built TallyGO because I was frustrated with existing finance apps. 
+          They were either too complex with features I never used, or too simple without the flexibility I needed.
+        </p>
+        <p className="text-[#5C5C5C] leading-relaxed mb-6 font-light">
+          As someone who values simplicity but needs powerful functionality, I wanted an app that could work offline 
+          (essential in Myanmar), respect my privacy, and let me track expenses without forcing me into rigid categories 
+          or overwhelming budgeting systems.
         </p>
         <p className="text-[#5C5C5C] leading-relaxed font-light">
-          This is a solo project, crafted with personal attention to detail. When you email support, you're talking to
-          me. I'm committed to keeping TallyGO simple, fast, and reliable for the long haul.
+          This is a solo project built from my own daily struggles with money tracking. Every feature exists because 
+          I personally needed it.I'm committed to keeping 
+          TallyGO focused, reliable, and genuinely useful for people like us who just want to understand our spending better.
         </p>
         <div className="mt-8 pt-8 border-t border-[#F3EFE7] flex items-center gap-4">
           <div className="w-10 h-10 rounded-full bg-[#F3EFE7] flex items-center justify-center text-[#1C1C1C] font-semibold text-sm">

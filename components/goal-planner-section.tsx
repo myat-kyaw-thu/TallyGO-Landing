@@ -15,11 +15,11 @@ export function GoalPlannerSection() {
 
   return (
     <section className="py-20 md:py-24 px-6 bg-[#F9F6F0]">
-      <div ref={ref} className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-        {/* Content */}
+      <div ref={ref} className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-16 items-center">
+        {/* Content - Takes 3 columns */}
         <div
           className={cn(
-            "transition-all duration-700",
+            "order-1 md:order-1 md:col-span-3 transition-all duration-700",
             isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8",
           )}
         >
@@ -30,8 +30,8 @@ export function GoalPlannerSection() {
             Set intentions for today, this month, or next month. Focus on daily momentum rather than overwhelming lists.
           </p>
           <ul className="space-y-4 text-[#3A3A3A]">
-            {features.map((feature) => (
-              <li key={feature.title} className="flex items-start gap-3">
+            {features.map((feature, index) => (
+              <li key={feature.title} className="flex items-start gap-3" style={{ animationDelay: `${index * 100}ms` }}>
                 <feature.icon className="mt-1 text-[#222222] shrink-0" size={18} />
                 <span>
                   <strong className="font-medium text-[#1C1C1C]">{feature.title}</strong> {feature.description}
@@ -41,17 +41,22 @@ export function GoalPlannerSection() {
           </ul>
         </div>
 
-        {/* Goal Planner Screenshot */}
+        {/* Goal Planner Screenshot - Takes 2 columns */}
         <div
           className={cn(
-            "relative rounded-3xl overflow-hidden transition-all duration-700 delay-200 max-w-[320px] mx-auto",
+            "order-2 md:order-2 md:col-span-2 relative transition-all duration-700 delay-200 max-w-[280px] sm:max-w-[300px] mx-auto",
             isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8",
           )}
         >
           <img
             src="/app-img/goals.jpeg"
             alt="Goal Planner Interface"
-            className="w-full max-h-[600px] object-contain rounded-3xl shadow-xl"
+            className="w-full h-auto rounded-[2.5rem] shadow-xl"
+            style={{
+              maxHeight: "500px",
+              objectFit: "contain",
+              boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+            }}
           />
         </div>
       </div>

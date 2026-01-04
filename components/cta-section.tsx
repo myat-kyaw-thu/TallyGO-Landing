@@ -31,7 +31,7 @@ export function CtaSection() {
             <span>Coming Soon for iOS</span>
           </button>
           <Link
-            href="https://drive.google.com/file/d/1ZOMoIGXh_rs_HwdRcMJRx6IZvhWTQmvi/view?usp=share_link"
+            href="https://drive.google.com/file/d/1_seo-ND3JVfQunVLTk2qY6HZujwi8-lV/view?usp=share_link"
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-4 bg-[#FFFDF8] border border-[#F3EFE7] text-[#1C1C1C] rounded-xl font-medium hover:bg-[#F9F6F0] transition-all duration-300 w-full sm:w-auto hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"

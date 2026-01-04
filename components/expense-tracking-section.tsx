@@ -19,14 +19,19 @@ export function ExpenseTrackingSection() {
         {/* Expense Tracking Screenshot */}
         <div
           className={cn(
-            "order-2 md:order-1 relative rounded-3xl overflow-hidden transition-all duration-700 max-w-[320px] mx-auto",
+            "order-2 md:order-1 relative transition-all duration-700 max-w-[280px] sm:max-w-[300px] mx-auto",
             isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8",
           )}
         >
           <img
             src="/app-img/expnces.jpeg"
             alt="Expense Tracking Interface"
-            className="w-full max-h-[600px] object-contain rounded-3xl shadow-xl"
+            className="w-full h-auto rounded-[2.5rem] shadow-xl"
+            style={{
+              maxHeight: "500px",
+              objectFit: "contain",
+              boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+            }}
           />
         </div>
 
