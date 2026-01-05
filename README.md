@@ -1,5 +1,7 @@
 # TallyGO
 
+![TallyGO Landing Page](public/app-img/landing-image.png)
+
 **Simple finances. Clear goals.**
 
 TallyGO is a beautifully simple mobile app that helps you track daily expenses and plan personal goals without clutter, complexity, or unnecessary features.
