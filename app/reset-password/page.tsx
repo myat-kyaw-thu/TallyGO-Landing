@@ -22,21 +22,75 @@ function ResetPasswordForm() {
   const [validTokens, setValidTokens] = useState(false)
   const [mounted, setMounted] = useState(false)
 
-  // Extract tokens from URL
-  const accessToken = searchParams.get('access_token')
-  const refreshToken = searchParams.get('refresh_token')
-  const type = searchParams.get('type')
+  // Extract tokens from URL (both search params and hash fragments)
+  const [urlParams, setUrlParams] = useState<{
+    accessToken: string | null
+    refreshToken: string | null
+    type: string | null
+    error: string | null
+    errorCode: string | null
+    errorDescription: string | null
+  }>({
+    accessToken: null,
+    refreshToken: null,
+    type: null,
+    error: null,
+    errorCode: null,
+    errorDescription: null
+  })
 
   useEffect(() => {
     setMounted(true)
-    // Validate tokens on component mount
-    if (type !== 'recovery' || !accessToken || !refreshToken) {
-      setError('Invalid or expired reset link. Please request a new password reset.')
-      setValidTokens(false)
-    } else {
-      setValidTokens(true)
+    
+    if (typeof window !== 'undefined') {
+      // Check URL search params first
+      const searchAccessToken = searchParams.get('access_token')
+      const searchRefreshToken = searchParams.get('refresh_token')
+      const searchType = searchParams.get('type')
+      
+      // Check URL hash fragments for both success and error cases
+      const hash = window.location.hash.substring(1) // Remove the #
+      const hashParams = new URLSearchParams(hash)
+      
+      const hashAccessToken = hashParams.get('access_token')
+      const hashRefreshToken = hashParams.get('refresh_token')
+      const hashType = hashParams.get('type')
+      const hashError = hashParams.get('error')
+      const hashErrorCode = hashParams.get('error_code')
+      const hashErrorDescription = hashParams.get('error_description')
+
+      // Use search params first, then fall back to hash params
+      const finalParams = {
+        accessToken: searchAccessToken || hashAccessToken,
+        refreshToken: searchRefreshToken || hashRefreshToken,
+        type: searchType || hashType,
+        error: hashError,
+        errorCode: hashErrorCode,
+        errorDescription: hashErrorDescription
+      }
+
+      setUrlParams(finalParams)
+
+      // Check for errors first
+      if (finalParams.error) {
+        let errorMessage = 'Invalid or expired reset link. Please request a new password reset.'
+        
+        if (finalParams.errorCode === 'otp_expired') {
+          errorMessage = 'This reset link has expired. Please request a new password reset.'
+        } else if (finalParams.errorDescription) {
+          errorMessage = decodeURIComponent(finalParams.errorDescription.replace(/\+/g, ' '))
+        }
+        
+        setError(errorMessage)
+        setValidTokens(false)
+      } else if (finalParams.type !== 'recovery' || !finalParams.accessToken || !finalParams.refreshToken) {
+        setError('Invalid or expired reset link. Please request a new password reset.')
+        setValidTokens(false)
+      } else {
+        setValidTokens(true)
+      }
     }
-  }, [accessToken, refreshToken, type])
+  }, [searchParams])
 
   const validatePassword = (password: string): string | null => {
     if (password.length < 8) {
@@ -75,8 +129,8 @@ function ResetPasswordForm() {
       
       // Set the session using tokens from URL
       await supabase.auth.setSession({
-        access_token: accessToken!,
-        refresh_token: refreshToken!
+        access_token: urlParams.accessToken!,
+        refresh_token: urlParams.refreshToken!
       })
 
       // Update the password
