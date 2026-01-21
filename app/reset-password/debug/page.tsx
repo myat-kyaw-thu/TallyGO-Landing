@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 
-export default function DebugPage() {
+function DebugContent() {
   const searchParams = useSearchParams()
   const [urlInfo, setUrlInfo] = useState<any>({})
 
@@ -53,5 +53,17 @@ export default function DebugPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function DebugPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+      </div>
+    }>
+      <DebugContent />
+    </Suspense>
   )
 }
