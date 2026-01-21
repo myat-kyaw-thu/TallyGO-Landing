@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { createSupabaseClient } from '@/lib/supabase'
 import { Button } from '@/components/ui/button'
@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Eye, EyeOff, CheckCircle, XCircle } from 'lucide-react'
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const searchParams = useSearchParams()
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -20,6 +20,7 @@ export default function ResetPasswordPage() {
   const [success, setSuccess] = useState('')
   const [loading, setLoading] = useState(false)
   const [validTokens, setValidTokens] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   // Extract tokens from URL
   const accessToken = searchParams.get('access_token')
@@ -27,6 +28,7 @@ export default function ResetPasswordPage() {
   const type = searchParams.get('type')
 
   useEffect(() => {
+    setMounted(true)
     // Validate tokens on component mount
     if (type !== 'recovery' || !accessToken || !refreshToken) {
       setError('Invalid or expired reset link. Please request a new password reset.')
@@ -94,13 +96,23 @@ export default function ResetPasswordPage() {
       setConfirmPassword('')
       
       // Clear URL parameters for security
-      window.history.replaceState({}, document.title, window.location.pathname)
+      if (typeof window !== 'undefined') {
+        window.history.replaceState({}, document.title, window.location.pathname)
+      }
       
     } catch (error) {
       setError('Failed to update password. Please try again.')
     } finally {
       setLoading(false)
     }
+  }
+
+  if (!mounted) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+      </div>
+    )
   }
 
   if (!validTokens) {
@@ -147,7 +159,7 @@ export default function ResetPasswordPage() {
             </Alert>
             <div className="mt-6">
               <Button 
-                onClick={() => window.close()} 
+                onClick={() => typeof window !== 'undefined' && window.close()} 
                 className="w-full"
                 variant="outline"
               >
@@ -271,5 +283,17 @@ export default function ResetPasswordPage() {
         </CardContent>
       </Card>
     </div>
+  )
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+      </div>
+    }>
+      <ResetPasswordForm />
+    </Suspense>
   )
 }
