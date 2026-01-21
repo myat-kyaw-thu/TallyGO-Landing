@@ -75,7 +75,7 @@ export function PhilosophySection() {
           <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#222222] flex items-center justify-center">
             <Heart size={28} className="text-[#FFFDF8]" />
           </div>
-          <h3 className="text-xl font-medium text-[#1C1C1C] mb-4">Our Philosophy</h3>
+          <h3 className="text-xl font-medium text-[#1C1C1C] mb-4">My Philosophy</h3>
           <p className="text-[#5C5C5C] leading-relaxed max-w-2xl mx-auto">
             I built TallyGO on radical simplicity. By stripping away the non-essentials, I created a space that feels calm, 
             intentional, and respectful of your attention. Because your financial journey should be peaceful, not stressful.

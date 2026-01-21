@@ -133,10 +133,16 @@ function ResetPasswordForm() {
       const supabase = createSupabaseClient()
       
       // Set the session using tokens from URL
-      await supabase.auth.setSession({
+      const { error: sessionError } = await supabase.auth.setSession({
         access_token: urlParams.accessToken!,
         refresh_token: urlParams.refreshToken!
       })
+
+      if (sessionError) {
+        setError('Invalid or expired reset link. Please request a new password reset.')
+        setLoading(false)
+        return
+      }
 
       // Update the password
       const { error: updateError } = await supabase.auth.updateUser({
@@ -160,6 +166,7 @@ function ResetPasswordForm() {
       }
       
     } catch (error) {
+      console.error('Password reset error:', error)
       setError('Failed to update password. Please try again.')
     } finally {
       setLoading(false)

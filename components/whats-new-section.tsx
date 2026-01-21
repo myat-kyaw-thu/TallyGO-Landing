@@ -1,6 +1,6 @@
 "use client"
 
-import { Globe, Check, Sparkles } from "lucide-react"
+import { Globe, Check, Sparkles, Moon, Lock, Key } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import { cn } from "@/lib/utils"
 
@@ -9,10 +9,10 @@ export function WhatsNewSection() {
 
   return (
     <section className="py-20 md:py-24 px-6 bg-[#F9F6F0] border-y border-[#F3EFE7]">
-      <div ref={ref} className="max-w-4xl mx-auto">
+      <div ref={ref} className="max-w-6xl mx-auto">
         <div
           className={cn(
-            "text-center mb-10 transition-all duration-700",
+            "text-center mb-12 transition-all duration-700",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
@@ -24,63 +24,106 @@ export function WhatsNewSection() {
             Latest Updates
           </h2>
           <p className="text-[#5C5C5C] max-w-2xl mx-auto">
-            Fresh improvements and new features to make your expense tracking even better.
+            Major new features and improvements to enhance your TallyGO experience.
           </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          {/* Localization */}
+          <div
+            className={cn(
+              "bg-[#FFFDF8] rounded-2xl p-6 border border-[#F3EFE7] shadow-lg transition-all duration-700 delay-100",
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
+            )}
+          >
+            <div className="w-12 h-12 mb-4 rounded-xl bg-[#222222] flex items-center justify-center">
+              <Globe size={24} className="text-[#FFFDF8]" />
+            </div>
+            <h3 className="text-lg font-medium text-[#1C1C1C] mb-3">Myanmar Language</h3>
+            <ul className="space-y-2 text-sm text-[#5C5C5C]">
+              <li className="flex items-start gap-2">
+                <Check className="mt-0.5 text-[#222222] shrink-0" size={14} />
+                <span>Complete interface translation</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="mt-0.5 text-[#222222] shrink-0" size={14} />
+                <span>Localized currency formatting</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="mt-0.5 text-[#222222] shrink-0" size={14} />
+                <span>Cultural date formats</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Dark Mode */}
+          <div
+            className={cn(
+              "bg-[#FFFDF8] rounded-2xl p-6 border border-[#F3EFE7] shadow-lg transition-all duration-700 delay-200",
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
+            )}
+          >
+            <div className="w-12 h-12 mb-4 rounded-xl bg-[#222222] flex items-center justify-center">
+              <Moon size={24} className="text-[#FFFDF8]" />
+            </div>
+            <h3 className="text-lg font-medium text-[#1C1C1C] mb-3">Light/Dark Mode</h3>
+            <ul className="space-y-2 text-sm text-[#5C5C5C]">
+              <li className="flex items-start gap-2">
+                <Check className="mt-0.5 text-[#222222] shrink-0" size={14} />
+                <span>System theme detection</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="mt-0.5 text-[#222222] shrink-0" size={14} />
+                <span>Manual theme switching</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="mt-0.5 text-[#222222] shrink-0" size={14} />
+                <span>Comfortable viewing anytime</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Security Features */}
+          <div
+            className={cn(
+              "bg-[#FFFDF8] rounded-2xl p-6 border border-[#F3EFE7] shadow-lg transition-all duration-700 delay-300",
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
+            )}
+          >
+            <div className="w-12 h-12 mb-4 rounded-xl bg-[#222222] flex items-center justify-center">
+              <Lock size={24} className="text-[#FFFDF8]" />
+            </div>
+            <h3 className="text-lg font-medium text-[#1C1C1C] mb-3">Enhanced Security</h3>
+            <ul className="space-y-2 text-sm text-[#5C5C5C]">
+              <li className="flex items-start gap-2">
+                <Check className="mt-0.5 text-[#222222] shrink-0" size={14} />
+                <span>Password change in-app</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="mt-0.5 text-[#222222] shrink-0" size={14} />
+                <span>Secure password reset</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="mt-0.5 text-[#222222] shrink-0" size={14} />
+                <span>Enhanced account protection</span>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div
           className={cn(
-            "grid grid-cols-1 md:grid-cols-2 gap-8 items-center transition-all duration-700 delay-200",
+            "text-center transition-all duration-700 delay-400",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
-          {/* New Features */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <Globe size={24} className="text-[#222222]" />
-              <h3 className="text-xl font-medium text-[#1C1C1C]">Myanmar Language Support</h3>
-            </div>
-            
-            <ul className="space-y-3 text-[#3A3A3A]">
-              <li className="flex items-start gap-3">
-                <Check className="mt-1 text-[#222222] shrink-0" size={18} />
-                <span>Complete interface translation in Myanmar</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Check className="mt-1 text-[#222222] shrink-0" size={18} />
-                <span>Localized currency formatting</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Check className="mt-1 text-[#222222] shrink-0" size={18} />
-                <span>Cultural date and time formats</span>
-              </li>
-            </ul>
-
-            <div className="pt-4">
-              <p className="text-sm text-[#5C5C5C] mb-3">Plus improvements:</p>
-              <ul className="text-sm text-[#5C5C5C] space-y-1">
-                <li>• Enhanced performance and stability</li>
-                <li>• Better offline sync reliability</li>
-                <li>• UI polish and bug fixes</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Update Highlight */}
-          <div className="relative">
-            <div className="bg-[#FFFDF8] rounded-2xl p-8 border border-[#F3EFE7] shadow-lg">
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#222222] flex items-center justify-center">
-                  <Globe size={28} className="text-[#FFFDF8]" />
-                </div>
-                <h4 className="text-lg font-medium text-[#1C1C1C] mb-2">Language Support</h4>
-                <p className="text-[#5C5C5C] text-sm mb-4">
-                  TallyGO now supports Myanmar language with full localization
-                </p>
-                <div className="text-sm text-[#222222] font-medium bg-[#F3EFE7] px-3 py-1 rounded-full inline-block">
-                  Free Update
-                </div>
-              </div>
+          <div className="bg-[#FFFDF8] rounded-2xl p-6 border border-[#F3EFE7] inline-block">
+            <p className="text-sm text-[#5C5C5C] mb-2">Plus improvements:</p>
+            <div className="flex flex-wrap justify-center gap-4 text-sm text-[#5C5C5C]">
+              <span>• Enhanced performance</span>
+              <span>• Better offline sync</span>
+              <span>• UI polish & bug fixes</span>
+              <span>• Improved accessibility</span>
             </div>
           </div>
         </div>

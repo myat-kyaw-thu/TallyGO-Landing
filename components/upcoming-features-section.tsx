@@ -13,13 +13,6 @@ const upcomingFeatures = [
     status: "In Development",
   },
   {
-    icon: Moon,
-    title: "Light/Dark Mode",
-    description: "Choose your preferred theme for comfortable viewing anytime",
-    priority: "High",
-    status: "Coming Soon",
-  },
-  {
     icon: User,
     title: "User Profile",
     description: "Personalize your experience with profile pictures, display names, and more",

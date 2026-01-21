@@ -1,14 +1,7 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-inter",
-})
 
 export const metadata: Metadata = {
   title: "TallyGO | Simple finances. Clear goals.",
@@ -95,7 +88,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} antialiased`}>
+      <body className="antialiased" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
         {children}
         <Analytics />
       </body>
