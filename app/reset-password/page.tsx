@@ -76,7 +76,9 @@ function ResetPasswordForm() {
         let errorMessage = 'Invalid or expired reset link. Please request a new password reset.'
         
         if (finalParams.errorCode === 'otp_expired') {
-          errorMessage = 'This reset link has expired. Please request a new password reset.'
+          errorMessage = 'This password reset link has expired. Password reset links are only valid for 1 hour for security reasons. Please request a new password reset from the app.'
+        } else if (finalParams.error === 'access_denied') {
+          errorMessage = 'Access denied. This reset link may have been used already or is no longer valid. Please request a new password reset from the app.'
         } else if (finalParams.errorDescription) {
           errorMessage = decodeURIComponent(finalParams.errorDescription.replace(/\+/g, ' '))
         }
@@ -175,18 +177,36 @@ function ResetPasswordForm() {
         <Card className="w-full max-w-md">
           <CardHeader className="text-center">
             <XCircle className="mx-auto h-12 w-12 text-red-500" />
-            <CardTitle className="text-2xl font-bold text-gray-900">Invalid Reset Link</CardTitle>
+            <CardTitle className="text-2xl font-bold text-gray-900">Reset Link Issue</CardTitle>
             <CardDescription>
-              This password reset link is invalid or has expired.
+              There's an issue with this password reset link.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-4">
             <Alert>
               <XCircle className="h-4 w-4" />
               <AlertDescription>
-                {error || 'Please request a new password reset from the app.'}
+                {error}
               </AlertDescription>
             </Alert>
+            
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <h3 className="font-semibold text-blue-900 mb-2">What to do next:</h3>
+              <ol className="text-sm text-blue-800 space-y-1 list-decimal list-inside">
+                <li>Open the TallyGO mobile app</li>
+                <li>Go to the login screen</li>
+                <li>Tap "Forgot Password?"</li>
+                <li>Enter your email address</li>
+                <li>Check your email for a new reset link</li>
+                <li>Use the new link within 1 hour</li>
+              </ol>
+            </div>
+
+            <div className="text-center">
+              <p className="text-sm text-gray-600">
+                Password reset links expire after 1 hour for security reasons.
+              </p>
+            </div>
           </CardContent>
         </Card>
       </div>
