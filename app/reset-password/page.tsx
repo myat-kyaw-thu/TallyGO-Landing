@@ -71,8 +71,12 @@ function ResetPasswordForm() {
 
       setUrlParams(finalParams)
 
-      // Check for errors first
-      if (finalParams.error) {
+      // Check for valid tokens first (success case)
+      if (finalParams.type === 'recovery' && finalParams.accessToken && finalParams.refreshToken) {
+        setValidTokens(true)
+        setError('') // Clear any previous errors
+      } else if (finalParams.error) {
+        // Only show errors if we don't have valid tokens
         let errorMessage = 'Invalid or expired reset link. Please request a new password reset.'
         
         if (finalParams.errorCode === 'otp_expired') {
@@ -85,11 +89,10 @@ function ResetPasswordForm() {
         
         setError(errorMessage)
         setValidTokens(false)
-      } else if (finalParams.type !== 'recovery' || !finalParams.accessToken || !finalParams.refreshToken) {
+      } else {
+        // No valid tokens and no specific error
         setError('Invalid or expired reset link. Please request a new password reset.')
         setValidTokens(false)
-      } else {
-        setValidTokens(true)
       }
     }
   }, [searchParams])
