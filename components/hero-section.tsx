@@ -58,7 +58,7 @@ export function HeroSection() {
           <span>Coming Soon for iOS</span>
         </button>
         <Link
-          href="https://drive.google.com/file/d/1_seo-ND3JVfQunVLTk2qY6HZujwi8-lV/view?usp=share_link"
+          href="https://drive.google.com/file/d/1sNCGWbSKsrpIjAVVNUSKnB-PrhxbyMt4/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           className="w-full sm:w-auto px-8 py-3.5 bg-[#FFFDF8] border border-[#F3EFE7] text-[#3A3A3A] rounded-xl font-medium hover:bg-[#F9F6F0] transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]"

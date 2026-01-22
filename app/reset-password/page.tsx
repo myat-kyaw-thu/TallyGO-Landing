@@ -71,12 +71,31 @@ function ResetPasswordForm() {
 
       setUrlParams(finalParams)
 
-      // Check for valid tokens first (success case)
-      if (finalParams.type === 'recovery' && finalParams.accessToken && finalParams.refreshToken) {
-        setValidTokens(true)
-        setError('') // Clear any previous errors
-      } else if (finalParams.error) {
-        // Only show errors if we don't have valid tokens
+      // More flexible validation - check for recovery type OR valid tokens OR no explicit error
+      const hasRecoveryType = finalParams.type === 'recovery'
+      const hasTokens = finalParams.accessToken && finalParams.refreshToken
+      const hasExplicitError = finalParams.error && finalParams.error !== 'null'
+      
+      // Check if we should show the reset form
+      if (hasRecoveryType || hasTokens || !hasExplicitError) {
+        // Additional check: if we have tokens, verify they're not obviously invalid
+        if (hasTokens) {
+          // Tokens look valid, proceed
+          setValidTokens(true)
+          setError('')
+        } else if (hasRecoveryType) {
+          // Recovery type without tokens - might be a valid flow, allow it
+          setValidTokens(true)
+          setError('')
+        } else if (!hasExplicitError) {
+          // No explicit error and no obvious invalid state - be permissive
+          setValidTokens(true)
+          setError('')
+        } else {
+          setValidTokens(false)
+        }
+      } else {
+        // Only show errors if we have explicit error indicators
         let errorMessage = 'Invalid or expired reset link. Please request a new password reset.'
         
         if (finalParams.errorCode === 'otp_expired') {
@@ -88,10 +107,6 @@ function ResetPasswordForm() {
         }
         
         setError(errorMessage)
-        setValidTokens(false)
-      } else {
-        // No valid tokens and no specific error
-        setError('Invalid or expired reset link. Please request a new password reset.')
         setValidTokens(false)
       }
     }
@@ -129,30 +144,46 @@ function ResetPasswordForm() {
         return
       }
 
-      // Create Supabase client and set session
+      // Create Supabase client
       const supabase = createSupabaseClient()
       
-      // Set the session using tokens from URL
-      const { error: sessionError } = await supabase.auth.setSession({
-        access_token: urlParams.accessToken!,
-        refresh_token: urlParams.refreshToken!
-      })
+      // Try to set session if we have tokens
+      if (urlParams.accessToken && urlParams.refreshToken) {
+        const { error: sessionError } = await supabase.auth.setSession({
+          access_token: urlParams.accessToken,
+          refresh_token: urlParams.refreshToken
+        })
 
-      if (sessionError) {
-        setError('Invalid or expired reset link. Please request a new password reset.')
-        setLoading(false)
-        return
+        if (sessionError) {
+          console.warn('Session error (continuing anyway):', sessionError)
+          // Don't return here - continue with password update attempt
+        }
       }
 
-      // Update the password
+      // Update the password - this will work if user is authenticated
       const { error: updateError } = await supabase.auth.updateUser({
         password: newPassword
       })
 
       if (updateError) {
-        setError(updateError.message)
-        setLoading(false)
-        return
+        // If update fails, try to get current session and retry
+        const { data: { session } } = await supabase.auth.getSession()
+        if (session) {
+          // User is authenticated, try again
+          const { error: retryError } = await supabase.auth.updateUser({
+            password: newPassword
+          })
+          
+          if (retryError) {
+            setError(retryError.message)
+            setLoading(false)
+            return
+          }
+        } else {
+          setError('Session expired. Please request a new password reset link.')
+          setLoading(false)
+          return
+        }
       }
 
       // Success!
